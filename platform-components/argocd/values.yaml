@@ -1,0 +1,6 @@
+argocd:
+  crds:
+    install: true
+  dex:
+    enabled: false
+

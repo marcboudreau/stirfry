@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring
+  namespace: default
+  labels:
+    type: platform
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  source:
+    path: stirfry/platform-components/monitoring
+    repoURL: https://github.com/marcboudreau/stirfry.git
+    targetRevision: HEAD
+    helm:
+      releaseName: monitoring
+      valueFiles:
+        - stirfry/platform-components/monitoring/base-values.yaml
+        - stirfry/platform-components/monitoring/{{ .Values.environmentname }}-values.yaml
