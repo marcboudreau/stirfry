@@ -1,0 +1,3 @@
+tofu-configuration/**/.terraform
+tofu-configuration/**/.terraform.lock.hcl
+tofu-configuration/**/terraform.tfstate
