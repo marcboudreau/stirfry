@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: root
-  namespace: default
+  namespace: argocd
   annotations:
     helm.sh/hook: post-install,post-upgrade
     helm.sh/hook-weight: "1"
@@ -10,13 +10,16 @@ metadata:
 spec:
   project: default
   destination:
-    namespace: default
+    namespace: argocd
     server: https://kubernetes.default.svc
   source:
-    path: stirfry/platform-components/argocd/argocd-applications
+    path: platform-components/argocd/argocd-applications
     repoURL: https://github.com/marcboudreau/stirfry.git
     targetRevision: HEAD
     helm:
       parameters:
         - name: environmentName
           value: {{ required "environmentName is required" .Values.environmentName }}
+  syncPolicy:
+    automated:
+      enabled: true
