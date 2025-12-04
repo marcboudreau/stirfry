@@ -14,8 +14,11 @@ spec:
     path: platform-components/monitoring
     repoURL: https://github.com/marcboudreau/stirfry.git
     targetRevision: HEAD
-    helm:
-      releaseName: monitoring
-      valueFiles:
-        - base-values.yaml
-        - {{ .Values.environmentName }}-values.yaml
+  helm:
+    releaseName: monitoring
+    valueFiles:
+      - base-values.yaml
+      - {{ .Values.environmentName }}-values.yaml
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
