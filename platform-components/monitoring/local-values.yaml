@@ -1,0 +1,4 @@
+prometheus:
+  prometheus-node-exporter:
+    hostRootFsMount:
+      enabled: false
