@@ -18,4 +18,4 @@ spec:
       releaseName: monitoring
       valueFiles:
         - base-values.yaml
-        - {{ .Values.environmentname }}-values.yaml
+        - {{ .Values.environmentName }}-values.yaml
