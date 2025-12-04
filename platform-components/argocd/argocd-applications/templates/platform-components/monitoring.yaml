@@ -17,5 +17,5 @@ spec:
     helm:
       releaseName: monitoring
       valueFiles:
-        - platform-components/monitoring/base-values.yaml
-        - platform-components/monitoring/{{ .Values.environmentname }}-values.yaml
+        - base-values.yaml
+        - {{ .Values.environmentname }}-values.yaml
