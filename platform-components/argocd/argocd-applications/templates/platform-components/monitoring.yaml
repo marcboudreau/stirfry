@@ -19,6 +19,7 @@ spec:
       valueFiles:
         - base-values.yaml
         - {{ .Values.environmentName }}-values.yaml
+      skipCrds: false
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
