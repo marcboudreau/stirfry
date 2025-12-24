@@ -2,13 +2,13 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: monitoring
-  namespace: argocd
+  namespace: {{ .Values.namespace | default "default" }}
   labels:
     type: platform
 spec:
   project: default
   destination:
-    namespace: monitoring
+    namespace: {{ .Values.namespace | default "default" }}
     server: https://kubernetes.default.svc
   source:
     path: platform-components/monitoring
@@ -23,5 +23,4 @@ spec:
     automated:
       enabled: true
     syncOptions:
-      - CreateNamespace=true
       - ServerSideApply=true

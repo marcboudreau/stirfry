@@ -4,31 +4,18 @@ The argocd component deploys Argo CD to manage deploying all of the other worklo
 
 ## Deployment
 
-To deploy ArgoCD, the **argocd** namespace must first be created.
+ArgoCD is installed, by default, in the **default** namespace along with all other resources. On local environments, a script is provided to execute all of the necessary commands and provide access to the ArgoCD web UI.
 
-```
-$ kubectl create namespace argocd
-```
-
-Then, Helm can be used to install ArgoCD.
-
-```
-$ helm install argocd . -n argocd -f values.yaml --set environmentName=<name_of_the_environment>
+```bash
+./scripts/install.sh
 ```
 
-## Usage
+This script will ensure that the **default** namespace exists and then it will install/upgrade this Helm chart in that namespace. After that, it waits for the server to be ready and then establishes a port-forwarding tunnel to the local port 3080, retrieves and displays the admin user's password, and opens a browser window at the https://localhost:3080 address.
 
-To access the ArgoCD Web UI, the **argocd-server** service's port needs to be forwarded to the workstation.
+#### Additional Script Options
 
-```
-$ kubectl port-forward service/argocd-server -n argocd 8080:80 &
-$ open http://localhost:8080
+* **e** - specifies a different environment name; this is affects which _*-values.yaml_ files get included in the ArgoCD applications
+* **l** - specifies a different file to receive command output
+* **n** - specifies a different namespace name
+* **q** - runs the script in quiet mode; most command output is squelched
 
-```
-
-The ArgoCD Web UI will prompt for a username and password. The username is `admin`. The password is randomly
-generated when ArgoCD is installed. To obtain the randomly generated password, run the following command:
-
-```
-$ kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
-```

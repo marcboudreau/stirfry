@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: root
-  namespace: argocd
+  namespace: {{ .Release.Namespace }}
   annotations:
     helm.sh/hook: post-install,post-upgrade
     helm.sh/hook-weight: "1"
@@ -10,7 +10,7 @@ metadata:
 spec:
   project: default
   destination:
-    namespace: argocd
+    namespace: {{ .Release.Namespace }}
     server: https://kubernetes.default.svc
   source:
     path: platform-components/argocd/argocd-applications
@@ -20,6 +20,8 @@ spec:
       parameters:
         - name: environmentName
           value: {{ required "environmentName is required" .Values.environmentName }}
+        - name: namespace
+          value: {{ .Release.Namespace }}
   syncPolicy:
     automated:
       enabled: true

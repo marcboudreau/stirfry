@@ -1,6 +1,6 @@
 apiVersion: v2
 name: monitoring
-description: A Helm chart for monitoring components
+description: A Helm chart for the monitoring component
 version: 0.1.0
 dependencies:
   - name: kube-prometheus-stack

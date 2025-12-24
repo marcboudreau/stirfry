@@ -1,3 +1,2 @@
 environmentName: local
-namespaces:
-  - monitoring
+namespace: default
