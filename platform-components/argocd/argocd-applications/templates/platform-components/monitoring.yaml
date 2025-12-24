@@ -20,6 +20,8 @@ spec:
         - base-values.yaml
         - {{ .Values.environmentName }}-values.yaml
   syncPolicy:
+    automated:
+      enabled: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
