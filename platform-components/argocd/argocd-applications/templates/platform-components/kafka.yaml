@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kafka
+  namespace: {{ .Values.namespace | default "default" }}
+  labels:
+    type: platform
+spec:
+  project: default
+  destination:
+    namespace: {{ .Values.namespace | default "default" }}
+    server: https://kubernetes.default.svc
+  source:
+    path: platform-components/monitoring
+    repoURL: https://github.com/marcboudreau/stirfry.git
+    targetRevision: HEAD
+    helm:
+      releaseName: kafka
+      valueFiles:
+        - base-values.yaml
+        - {{ .Values.environmentName }}-values.yaml
+  syncPolicy:
+    automated:
+      enabled: true
+    syncOptions:
+      - ServerSideApply=true
