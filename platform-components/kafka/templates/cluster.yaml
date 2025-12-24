@@ -4,8 +4,8 @@ metadata:
   name: kafka
 spec:
   kafka:
-    version: {{ .Values.version }}
-    metadataVersion: {{ .Values.metadataVersion }}
+    version: {{ .Values.version | quote }}
+    metadataVersion: {{ .Values.metadataVersion | quote }}
 
     config:
       auto.create.topics.enabled: "false"
