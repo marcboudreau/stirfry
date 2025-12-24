@@ -3,4 +3,7 @@ argocd:
     install: true
   dex:
     enabled: false
+  configs:
+    cm:
+      application.resourceTrackingMethod: label
 
