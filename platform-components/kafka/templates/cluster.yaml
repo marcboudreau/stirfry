@@ -6,7 +6,15 @@ spec:
   kafka:
     version: {{ .Values.version | quote }}
     metadataVersion: {{ .Values.metadataVersion | quote }}
-
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
     config:
       auto.create.topics.enabled: "false"
       offsets.topic.replication.factor: 3
