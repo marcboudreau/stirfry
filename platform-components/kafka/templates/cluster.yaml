@@ -1,0 +1,22 @@
+apiVersion: kafka.strimzi.io/v1
+kind: Kafka
+metadata:
+  name: kafka
+spec:
+  kafka:
+    version: {{ .Values.version }}
+    metadataVersion: {{ .Values.metadataVersion }}
+
+    config:
+      auto.create.topics.enabled: "false"
+      offsets.topic.replication.factor: 3
+      transaction.state.log.replication.factor: 3
+      transaction.state.log.min.isr: 2
+      default.replication.factor: 3
+      min.insync.replicas: 2
+
+    metricsConfig:
+      type: strimziMetricsReporter
+      values:
+        allowList:
+          key: ".*"
