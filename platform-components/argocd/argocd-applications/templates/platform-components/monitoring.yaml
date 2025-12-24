@@ -6,6 +6,7 @@ metadata:
   labels:
     type: platform
 spec:
+  resourceTrackingMethod: Label
   project: default
   destination:
     namespace: monitoring
