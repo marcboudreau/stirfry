@@ -11,7 +11,7 @@ spec:
     namespace: {{ .Values.namespace | default "default" }}
     server: https://kubernetes.default.svc
   source:
-    path: platform-components/monitoring
+    path: platform-components/kafka
     repoURL: https://github.com/marcboudreau/stirfry.git
     targetRevision: HEAD
     helm:
