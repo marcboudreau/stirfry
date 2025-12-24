@@ -19,4 +19,4 @@ spec:
       type: strimziMetricsReporter
       values:
         allowList:
-          key: ".*"
+          - ".*"
