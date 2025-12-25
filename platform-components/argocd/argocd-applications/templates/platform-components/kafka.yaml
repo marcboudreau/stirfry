@@ -24,3 +24,7 @@ spec:
       enabled: true
     syncOptions:
       - ServerSideApply=true
+  ignoreDifferences:
+    - group: ""
+      kind: PersistentVolumeClaim
+      name: data-*
