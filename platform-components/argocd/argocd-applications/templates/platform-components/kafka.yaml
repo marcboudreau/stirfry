@@ -22,9 +22,6 @@ spec:
   syncPolicy:
     automated:
       enabled: true
+      prune: false
     syncOptions:
       - ServerSideApply=true
-  ignoreDifferences:
-    - group: ""
-      kind: PersistentVolumeClaim
-      name: data-*
