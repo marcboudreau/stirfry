@@ -6,7 +6,7 @@ metadata:
   labels:
     type: platform
 spec:
-  project: stirfry
+  project: default
   destination:
     namespace: {{ .Values.namespace | default "default" }}
     server: https://kubernetes.default.svc
