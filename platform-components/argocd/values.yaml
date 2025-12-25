@@ -6,4 +6,8 @@ argocd:
   configs:
     cm:
       application.resourceTrackingMethod: label
-
+      resource.exclusions: |
+        - apiGroups:
+            - ""
+          kinds:
+            - PersistentVolumeClaim
