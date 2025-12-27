@@ -1,0 +1,41 @@
+# CloudNativePG Operator Configuration
+# Ensure the operator deployment is created with the correct labels
+# that the operator expects to find (app.kubernetes.io/name=cloudnative-pg)
+#
+# The chart is aliased as "postgresql" in Chart.yaml, which causes the
+# deployment to be labeled with app.kubernetes.io/name=postgresql.
+# The operator expects app.kubernetes.io/name=cloudnative-pg, so we
+# must override the name to match what the operator is looking for.
+
+postgresql:
+  # Override the name to ensure labels match what the operator expects
+  nameOverride: "cloudnative-pg"
+  
+  # Operator configuration
+  config:
+    create: true
+    clusterWide: true
+    data: {}
+  
+  # Ensure the deployment is created
+  replicaCount: 1
+  
+  # Service account
+  serviceAccount:
+    create: true
+  
+  # RBAC
+  rbac:
+    create: true
+  
+  # CRDs
+  crds:
+    create: true
+  
+  # Webhook configuration
+  webhook:
+    mutating:
+      create: true
+    validating:
+      create: true
+
