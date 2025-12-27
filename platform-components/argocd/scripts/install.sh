@@ -6,7 +6,7 @@
 log_location="/dev/stdout"
 environment_name="local"
 quiet="false"
-namespace="default"
+namespace="platform"
 
 #
 # Parse command line arguments

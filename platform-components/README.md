@@ -6,6 +6,8 @@ This directory contains the configuration used to manage platform components in 
 Platform Components
 -------------------
 
+All platform components are provisioned in the **platform** namespace.
+
 ### argocd
 
 The **argocd** platform component is a bit special because its Helm chart installs ArgoCD (the _charts/_ subdirectory and _templates/_ subdirectory), but it also installs ArgoCD applications in the Kubernetes cluster for all of the other components (the _argocd-applications/templates_ subdirectory).
