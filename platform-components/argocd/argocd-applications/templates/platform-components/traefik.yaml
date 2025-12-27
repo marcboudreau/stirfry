@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: {{ .Values.namespace | default "platform" }}
+  labels:
+    type: platform
+spec:
+  project: default
+  destination:
+    namespace: {{ .Values.namespace | default "platform" }}
+    server: https://kubernetes.default.svc
+  source:
+    path: platform-components/traefik
+    repoURL: https://github.com/marcboudreau/stirfry.git
+    targetRevision: HEAD
+    helm:
+      releaseName: traefik
+      valuesFiles:
+        - base-values.yaml
+        - {{ .Values.environmentName }}-values.yaml
+  syncPolicy:
+    automated:
+      enabled: true
+    syncOptions:
+      - ServerSideApply=true
