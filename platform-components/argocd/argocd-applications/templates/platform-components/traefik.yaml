@@ -16,7 +16,7 @@ spec:
     targetRevision: HEAD
     helm:
       releaseName: traefik
-      valuesFiles:
+      valueFiles:
         - base-values.yaml
         - {{ .Values.environmentName }}-values.yaml
   syncPolicy:
