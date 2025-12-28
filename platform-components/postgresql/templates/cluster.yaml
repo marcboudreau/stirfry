@@ -1,0 +1,10 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgresql
+  namespace: {{ .Values.namespace | default "platform" }}
+spec:
+  instances: 3
+
+  storage:
+    size: 1Gi

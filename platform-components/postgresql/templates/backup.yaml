@@ -1,0 +1,11 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: postgresql
+  namespace: {{ .Values.namespace | default "platform" }}
+spec:
+  schedule: "0 0 * * * *" # At every hour on the hour
+  backupOwnerReference: cluster
+  cluster:
+    name: postgresql
+  method: volumeSnapshot
