@@ -39,3 +39,4 @@ postgresql:
     validating:
       create: true
 
+localEnvironment: false
