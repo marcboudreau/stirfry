@@ -1,0 +1,6 @@
+dependencies:
+- name: pgbouncer
+  repository: https://estaid-app.github.io/helm
+  version: 1.0.7
+digest: sha256:448763e0c140a365125a9ba801c872082af82c048769699b62d3e86c0bc8b103
+generated: "2026-01-10T22:02:52.957814-05:00"

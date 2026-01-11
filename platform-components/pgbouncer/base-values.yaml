@@ -1,0 +1,99 @@
+pgbouncer:
+  # Number of replicas for the deployment (default: 1)
+  replicaCount: 2
+  
+  # PgBouncer configuration
+  config:
+    # Set pooling mode to transaction (default: session)
+    pool_mode: transaction
+    
+    # Connection pooling settings
+    # Maximum number of client connections PgBouncer will accept (default: 100)
+    # Ensure: max_client_conn + (default_pool_size * number_of_pools) < file_descriptor_limit
+    max_client_conn: 1000
+    
+    # Number of server connections per user/database pair (default: 20)
+    # Adjust based on: max_concurrent_operations / number_of_pools
+    default_pool_size: 25
+    
+    # Minimum number of server connections to maintain per pool (default: 0)
+    # Helps maintain baseline connections for better responsiveness
+    min_pool_size: 5
+    
+    # Maximum number of server connections per database
+    # Prevents overloading the PostgreSQL server
+    max_db_connections: 100
+    
+    # Reserve pool size for admin connections
+    # Connections reserved for admin operations when pool is exhausted
+    reserve_pool_size: 5
+    
+    # Network and listening configuration
+    # Note: listen_port 5432 (pgbouncer default is 6432, but chart may use 5432)
+    listen_port: 5432
+    
+    # Authentication configuration (default: trust or md5)
+    # Options: trust, plain, md5, scram-sha-256
+    auth_type: scram-sha-256
+    
+    # Logging configuration (defaults: verbose=0, log_connections=0, log_disconnections=0)
+    # Log level: 0=verbose, 1=notice, 2=warning, 3=error
+    verbose: 1
+    log_connections: 1
+    log_disconnections: 1
+    log_pooler_errors: 1
+    
+    # Ignore startup parameters that don't affect connection pooling (default: unset)
+    ignore_startup_parameters: extra_float_digits
+  
+  # Resource limits and requests
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  
+  # Health check configuration
+  # Liveness probe - checks if container is running
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+  
+  # Readiness probe - checks if container is ready to accept traffic
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
+  
+  # Pod disruption budget for high availability
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
+  
+  # PgBouncer backend database configuration
+  # This configures where PgBouncer connects to PostgreSQL (backend connections)
+  # Applications connect to PgBouncer via the Kubernetes service endpoint
+  # (e.g., pgbouncer.platform.svc.cluster.local:5432)
+  # This should be configured per environment via environment-specific values files
+  # Example structure (adjust based on chart's expected format):
+  # databases:
+  #   your_database:
+  #     host: postgresql.platform.svc.cluster.local
+  #     port: 5432
+  #     dbname: your_database
+  #     pool_size: 25
+  
+  # User authentication list
+  # This should be configured via secrets in production
+  # For scram-sha-256, the format is:
+  # userlist:
+  #   user1: "SCRAM-SHA-256$4096:salt==$storedkey=:serverkey="
+  #   user2: "SCRAM-SHA-256$4096:salt==$storedkey=:serverkey="
+  # Generate hashes using: scram-sha256 <password> (from pg-scram-sha256 package)

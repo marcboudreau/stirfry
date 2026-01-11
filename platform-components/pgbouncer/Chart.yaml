@@ -1,0 +1,8 @@
+apiVersion: v2
+name: pgbouncer
+description: A Helm chart to install pgbouncer
+version: 0.1.0
+dependencies:
+  - name: pgbouncer
+    version: 1.0.7
+    repository: https://estaid-app.github.io/helm
