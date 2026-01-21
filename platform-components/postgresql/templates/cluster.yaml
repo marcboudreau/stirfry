@@ -12,6 +12,9 @@ spec:
   managed:
     roles:
       - name: pgbouncer_auth
+        connectionLimit: -1
+        ensure: present
+        inherit: true
         login: true
         comment: "Role used by pgbouncer to check client credentials"
         inRoles:
