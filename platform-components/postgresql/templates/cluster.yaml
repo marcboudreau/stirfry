@@ -8,3 +8,12 @@ spec:
 
   storage:
     size: 1Gi
+
+  managed:
+    roles:
+      - name: pgbouncer_auth
+        login: true
+        comment: "Role used by pgbouncer to check client credentials"
+        inRoles:
+          - pg_read_all_stats
+          - pg_read_all_settings

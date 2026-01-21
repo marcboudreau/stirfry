@@ -1,4 +1,4 @@
-{{- if .Values.localEnvironment }}
+{{- if eq .Values.localEnvironment false }}
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
